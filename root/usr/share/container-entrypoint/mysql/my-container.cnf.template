@@ -1,0 +1,21 @@
+#
+# Container specific configuration
+#
+# NOTICE: This file is rewritten every time container is started!
+#         Any changes to this file will be overwritten.
+#
+
+[mysqld]
+
+# The path to the MySQL server data directory.
+datadir = ${MYSQL_DATADIR}
+
+# Specifies whether to use the Linux asynchronous I/O subsystem.
+# Default: 1
+innodb_use_native_aio = ${MYSQL_INNODB_USE_NATIVE_AIO}
+
+# If set to 0, table names are stored as specified and comparisons are case sensitive. If set to 1, table names are
+# stored in lowercase on disk and comparisons are not case sensitive. If set to 2, table names are stored as given
+# but compared in lowercase.
+# Default: 0
+lower_case_table_names = ${MYSQL_LOWER_CASE_TABLE_NAMES}

@@ -1,0 +1,1 @@
+root/usr/share/container-entrypoint/mysql/README.md

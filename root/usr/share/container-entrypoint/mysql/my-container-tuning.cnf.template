@@ -1,0 +1,97 @@
+#
+# Container specific configuration
+#
+# NOTICE: This file is rewritten every time container is started!
+#         Any changes to this file will be overwritten.
+#
+
+[mysql]
+
+no-auto-rehash
+
+[mysqld]
+
+# The maximum length of the word to be included in a MyISAM FULLTEXT index.
+# Default: 20
+ft_max_word_len = ${MYSQL_FT_MAX_WORD_LEN}
+
+# The minimum length of the word to be included in a MyISAM FULLTEXT index.
+# Default: 4
+ft_min_word_len = ${MYSQL_FT_MIN_WORD_LEN}
+
+# The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
+# Default: 128M (or 50% of available memory)
+innodb_buffer_pool_size = ${MYSQL_INNODB_BUFFER_POOL_SIZE}
+
+# The size in bytes of the buffer that InnoDB uses to write to the log files on disk.
+# Default: 16M (or 12.5% of available memory)
+innodb_log_buffer_size = ${MYSQL_INNODB_LOG_BUFFER_SIZE}
+
+# The size in bytes of each log file in a log group.
+# Default: 48M (or 12.5% of available memory)
+innodb_log_file_size = ${MYSQL_INNODB_LOG_FILE_SIZE}
+
+# The size of the buffer used for index blocks.
+# Default: 8M (or 10% of available memory)
+key_buffer_size = ${MYSQL_KEY_BUFFER_SIZE}
+
+# The maximum size of one packet or any generated/intermediate string.
+# Default: 4M
+max_allowed_packet = ${MYSQL_MAX_ALLOWED_PACKET}
+
+# The maximum permitted number of simultaneous client connections.
+# Default: 151
+max_connections = ${MYSQL_MAX_CONNECTIONS}
+
+# The size of the buffer that is allocated when sorting MyISAM indexes.
+# Default: 8M
+myisam_sort_buffer_size = 8M
+
+# Initial size of connection buffer and result buffer.
+# Default: 16K
+net_buffer_length = 2K
+
+# The size of buffer used for sequential scan.
+# Default: 128K (or 5% of available memory)
+read_buffer_size = ${MYSQL_READ_BUFFER_SIZE}
+
+# The size of buffer used for reads from MyISAM tables.
+# Default: 256K
+read_rnd_buffer_size = 256K
+
+# The size of buffer used for sorting.
+# Default: 256K
+sort_buffer_size = ${MYSQL_SORT_BUFFER_SIZE}
+
+# The number of open tables for all threads.
+# Default: 2000
+table_open_cache = ${MYSQL_TABLE_OPEN_CACHE}
+
+# The stack size for each thread.
+# Default: 256K
+thread_stack = 256K
+
+[mysqldump]
+
+# The maximum size of one packet or any generated/intermediate string.
+max_allowed_packet = 16M
+
+# Forces mysqldump to retrieve rows for a table from the server a row at a time rather than retrieving the entire row
+# set and buffering it in memory before writing it out.
+quick
+
+[myisamchk]
+
+# The maximum length of the word to be included in a MyISAM FULLTEXT index.
+# Default: 20
+ft_max_word_len = ${MYSQL_FT_MAX_WORD_LEN}
+
+# The minimum length of the word to be included in a MyISAM FULLTEXT index.
+# Default: 4
+ft_min_word_len = ${MYSQL_FT_MIN_WORD_LEN}
+
+# The size of the buffer used for index blocks.
+key_buffer_size = 8M
+
+# The size of buffer used for sorting.
+sort_buffer_size = 256K

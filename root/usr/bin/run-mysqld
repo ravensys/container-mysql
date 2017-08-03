@@ -1,0 +1,38 @@
+#!/bin/bash
+
+source "${CONTAINER_ENTRYPOINT_PATH}/common.sh"
+source "${CONTAINER_ENTRYPOINT_PATH}/mysql/common.sh"
+set -o errexit
+set -o nounset
+
+mysql_export_config_variables
+
+if [ -f "${CONTAINER_ENTRYPOINT_PATH}/mysql/validate-variables.sh" ]; then
+    log_message "Running environment variables validations ..."
+    source "${CONTAINER_ENTRYPOINT_PATH}/mysql/validate-variables.sh"
+fi
+
+log_message "Processing MySQL configuration files ..."
+mysql_generate_config
+
+if ! mysql_is_initialized; then
+    log_message "MySQL is not initialized. Running MySQL initialization process ..."
+    mysql_initialize
+
+    if [ -d "${CONTAINER_ENTRYPOINT_PATH}/mysql/post-init.d" ]; then
+        log_message "Sourcing post-initialization scripts ..."
+        source_scripts "${CONTAINER_ENTRYPOINT_PATH}/mysql/post-init.d"
+    fi
+else
+    mysql_start_local
+fi
+
+if [ -f "${CONTAINER_ENTRYPOINT_PATH}/mysql/update-passwords.sh" ]; then
+    log_message "Updating passwords ..."
+    source "${CONTAINER_ENTRYPOINT_PATH}/mysql/update-passwords.sh"
+fi
+
+mysql_stop_local
+mysql_cleanup_environment
+log_message "Running final exec -- Only MySQL server logs after this point"
+exec mysqld --datadir="${MYSQL_DATADIR}" "$@"
