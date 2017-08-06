@@ -42,17 +42,17 @@ function ci_case_config_files() {
 
     echo " ---> Testing configuration auto-tuning capabilities"
     ci_mysql_config_defaults
-    MYSQL_INNODB_BUFFER_POOL_SIZE=256M
-    MYSQL_INNODB_LOG_BUFFER_SIZE=64M
-    MYSQL_INNODB_LOG_FILE_SIZE=64M
-    MYSQL_KEY_BUFFER_SIZE=51M
-    MYSQL_READ_BUFFER_SIZE=25M
+    MYSQL_INNODB_BUFFER_POOL_SIZE=384M
+    MYSQL_INNODB_LOG_BUFFER_SIZE=96M
+    MYSQL_INNODB_LOG_FILE_SIZE=96M
+    MYSQL_KEY_BUFFER_SIZE=76M
+    MYSQL_READ_BUFFER_SIZE=38M
 
     ci_mysql_container "${TEST_CASE}_autotune" testuser testpass \
         -e MYSQL_USER=testuser \
         -e MYSQL_PASSWORD=testpass \
         -e MYSQL_DATABASE=testdb \
-        -m 512M
+        -m 768M
 
     echo " ------> Testing MySQL configuration"
     ci_assert_configuration "${TEST_CASE}_autotune"
