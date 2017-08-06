@@ -1,0 +1,19 @@
+---
+language: bash
+
+sudo: required
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - acl
+
+script:
+  - make test VERSION=5.6
+  - make test VERSION=5.7
+
+after_success:
+  |-
+    [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ] && curl -H "Content-Type: application/json" --data '{"build": true}' -X POST "${DOCKERHUB_TRIGGER}"
