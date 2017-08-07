@@ -211,7 +211,7 @@ ENV LANG de_DE.UTF-8
 Troubleshooting
 ---------------
 
-The container initialization scripts and mysql daemon logs to the standard output, so these are available in container 
+The container initialization scripts and mysqld daemon logs to the standard output, so these are available in container 
 log. This log can be examined by running:
 
 ```

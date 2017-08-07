@@ -17,9 +17,9 @@ clients. You can find more information on the MySQL project from the project Web
 Usage
 -----
 
-If the database data directory is not initialized, the entrypoint script will first run `mysqld --initialize-insecure` 
-and setup necessary database users and password. After database is initialized, or if it was already present, `mysqld` 
-is executed and will run as PID 1.
+If the database data directory is not initialized, the entrypoint script will first run `mysql_install_db` and setup 
+necessary database users and password. After database is initialized, or if it was already present, `mysqld` is 
+executed and will run as PID 1.
 
 * **Simple user with database**
 
@@ -211,7 +211,7 @@ ENV LANG de_DE.UTF-8
 Troubleshooting
 ---------------
 
-The container initialization scripts and mysql daemon logs to the standard output, so these are available in container 
+The container initialization scripts and mysqld daemon logs to the standard output, so these are available in container 
 log. This log can be examined by running:
 
 ```
