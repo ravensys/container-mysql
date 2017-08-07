@@ -80,7 +80,7 @@ EOSQL
 function mysql_drop_user() {
     local user="$1"; shift
 
-    if [[ "${MYSQL_VERSION}" < "5.7" ]]; then
+    if version_lt "${MYSQL_VERSION}" "5.7"; then
         mysql_cmd <<EOSQL
 GRANT USAGE ON *.* TO '${user}'@'%';
 DROP USER '${user}'@'%';
@@ -142,7 +142,7 @@ EOSQL
 }
 
 function mysql_initialize() {
-    if [[ "${MYSQL_VERSION}" < "5.7" ]]; then
+    if version_lt "${MYSQL_VERSION}" "5.7"; then
         mysql_install_db --datadir="${MYSQL_DATADIR}" --rpm
     else
         mysqld --datadir="${MYSQL_DATADIR}" --ignore-db-dir=lost+found --initialize-insecure

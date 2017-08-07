@@ -9,7 +9,7 @@ function mysql_update_passwords() {
 
     local mysql_admin_password; mysql_admin_password="$( get_value MYSQL_ADMIN_PASSWORD '' )"
     if [ -n "${mysql_admin_password}" ]; then
-        if [[ "${MYSQL_VERSION}" > "5.6" ]]; then
+        if version_ge "${MYSQL_VERSION}" "5.7"; then
             mysql_create_user_if_not_exists root
         fi
         mysql_cmd <<EOSQL
